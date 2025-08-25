@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".feature.updates.presentation.ui.fragment.NewDetailFragment">
+
+    <TextView
+        android:id="@+id/tvSectionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:fontFamily="@font/roboto_semibold"
+        android:text="@string/recent_updates"
+        android:textColor="@color/dark_blue"
+        android:textSize="@dimen/dimen_18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/horizontalLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dimen_1dp"
+        android:background="@color/dark_blue"
+        app:layout_constraintEnd_toEndOf="@+id/tvSectionTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvSectionTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvSectionTitle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSectionTitle" />
+</androidx.constraintlayout.widget.ConstraintLayout>

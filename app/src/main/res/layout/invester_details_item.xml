@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dimen_1dp"
+        app:cardElevation="@dimen/dimen_5dp"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/light_gray"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_15dp">
+
+            <TextView
+                android:id="@+id/tvFundTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_semibold"
+                android:maxLines="1"
+                android:text="SBI Healthcare Opportunities Fund"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_16sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvReturns"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvReturns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:fontFamily="@font/roboto_semibold"
+                android:text="₹5,000"
+                android:textColor="@color/dark_blue"
+                android:textSize="@dimen/dimen_16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvFundTitle" />
+
+            <TextView
+                android:id="@+id/tvInvestorName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_6dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Investor • Deepak Mandal"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/dimen_15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvFundTitle" />
+
+            <TextView
+                android:id="@+id/tvInvestmentDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_6dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Investment Date : 24 Aug 2025"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/dimen_15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvInvestorName" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-25dp"
+                android:backgroundTint="@color/dark_blue"
+                android:text="Active"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_14sp"
+                app:cornerRadius="0dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvInvestmentDate" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/portFolioFragment"
+        android:icon="@drawable/selector_portfolio"
+        android:title="Portfolio" />
+
+    <item
+        android:id="@+id/newDetailFragment"
+        android:icon="@drawable/selector_news"
+        android:title="Updates" />
+</menu>
