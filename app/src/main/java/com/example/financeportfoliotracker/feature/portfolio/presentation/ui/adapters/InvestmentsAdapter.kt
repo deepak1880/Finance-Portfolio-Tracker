@@ -10,6 +10,7 @@ import com.example.financeportfoliotracker.R
 
 class InvestmentsAdapter(
     private var items: List<InvestmentEntity> = listOf(),
+    private val onItemClick: (InvestmentEntity) -> Unit
 ) : RecyclerView.Adapter<InvestmentsAdapter.InvestmentViewHolder>() {
 
     inner class InvestmentViewHolder(
@@ -32,7 +33,9 @@ class InvestmentsAdapter(
                         ContextCompat.getColorStateList(context, R.color.dark_blue)
                 }
             }
-
+            binding.root.setOnClickListener {
+                onItemClick(item)
+            }
         }
     }
 

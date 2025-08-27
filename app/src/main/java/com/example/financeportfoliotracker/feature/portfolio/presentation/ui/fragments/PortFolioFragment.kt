@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.financeportfoliotracker.core.ui.base.BaseFragment
+import com.example.financeportfoliotracker.core.utils.Constants
 import com.example.financeportfoliotracker.databinding.FragmentPortFolioBinding
 import com.example.financeportfoliotracker.feature.portfolio.data.model.InvestmentEntity
 import com.example.financeportfoliotracker.feature.portfolio.presentation.ui.adapters.InvestmentsAdapter
@@ -43,7 +44,12 @@ class PortFolioFragment : BaseFragment<FragmentPortFolioBinding>() {
             })
         }
 
-        adapter = InvestmentsAdapter()
+        adapter = InvestmentsAdapter(onItemClick = { investment ->
+            Constants.UPDATE_JOURNEY=true
+            val action = PortFolioFragmentDirections
+                .actionPortFolioFragmentToInvestmentDetailsFragment()
+            findNavController().navigate(action)
+        })
         binding.rvInvestorDetails.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@PortFolioFragment.adapter

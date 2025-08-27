@@ -14,6 +14,7 @@ import android.widget.Toast
 import java.util.Calendar
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
+import com.example.financeportfoliotracker.core.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,6 +41,13 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
 
         viewModel.fetchInvestmentDetails()
 
+        if (Constants.UPDATE_JOURNEY) {
+            binding.btnSubmit.text = "Update"
+        } else {
+            binding.btnSubmit.text = "Submit"
+        }
+
+        Constants.UPDATE_JOURNEY = false
     }
 
     private fun setupSpinner() {
@@ -116,13 +124,14 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
             investmentAmount = investmentAmount.toDouble(),
         )
 
-        if (selectedDetail == null) {
-            viewModel.insertInvestmentDetail(detail)
-            Toast.makeText(requireContext(), "Investment added", Toast.LENGTH_SHORT).show()
-        } else {
+        if (Constants.UPDATE_JOURNEY) {
             viewModel.updateInvestmentDetail(detail)
             Toast.makeText(requireContext(), "Investment updated", Toast.LENGTH_SHORT).show()
+        } else {
+            viewModel.insertInvestmentDetail(detail)
+            Toast.makeText(requireContext(), "Investment added", Toast.LENGTH_SHORT).show()
         }
+        Constants.UPDATE_JOURNEY = false
         findNavController().popBackStack()
 
         clearForm()

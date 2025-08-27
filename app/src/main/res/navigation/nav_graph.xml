@@ -23,5 +23,6 @@
     <fragment
         android:id="@+id/investmentDetailsFragment"
         android:name="com.example.financeportfoliotracker.feature.investmentdetails.presentation.ui.InvestmentDetailsFragment"
-        android:label="InvestmentDetailsFragment" />
+        android:label="InvestmentDetailsFragment" >
+    </fragment>
 </navigation>
