@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.financeportfoliotracker.core.ui.base.BaseFragment
 import com.example.financeportfoliotracker.databinding.FragmentPortFolioBinding
 import com.example.financeportfoliotracker.feature.portfolio.data.model.InvestmentEntity
@@ -49,8 +50,8 @@ class PortFolioFragment : BaseFragment<FragmentPortFolioBinding>() {
     override fun setUpOnClickListeners() {
         super.setUpOnClickListeners()
 
-//        binding.fabAddInvestment.setOnClickListener {
-//            findNavController().navigate(R.id.action_portFolioFragment_to_investmentDetailsFragment)
-//        }
+        binding.fabAddInvestment.setOnClickListener {
+            val action = PortFolioFragmentDirections.actionPortFolioFragmentToInvestmentDetailsFragment()
+            findNavController().navigate(action)        }
     }
 }

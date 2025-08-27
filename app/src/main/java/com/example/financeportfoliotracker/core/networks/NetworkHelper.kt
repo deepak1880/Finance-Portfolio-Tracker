@@ -32,9 +32,5 @@ object NetworkHelper {
         return retrofit.create(ApiService::class.java)
     }
 
-    @Provides
-    @Singleton
-    fun providePostRepository(apiService: ApiService): NewsRepository {
-        return NewsRepositoryImpl(apiService)
-    }
+
 }

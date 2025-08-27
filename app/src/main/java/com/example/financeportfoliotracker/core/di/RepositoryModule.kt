@@ -6,27 +6,27 @@ import com.example.financeportfoliotracker.feature.portfolio.data.repository.Por
 import com.example.financeportfoliotracker.feature.portfolio.domain.repository.PortFolioRepository
 import com.example.financeportfoliotracker.feature.updates.data.repository.NewsRepositoryImpl
 import com.example.financeportfoliotracker.feature.updates.domain.repository.NewsRepository
+import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import jakarta.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
 
-    @Singleton
+    @Binds
     abstract fun bindPortFolioRepository(
         impl: PortFolioRepositoryImpl
     ): PortFolioRepository
 
 
-    @Singleton
+    @Binds
     abstract fun bindNewsRepository(
         impl: NewsRepositoryImpl
     ): NewsRepository
 
-    @Singleton
+    @Binds
     abstract fun bindInvestmentDetailRepository(
         impl: InvestmentDetailRepositoryImpl
     ): InvestmentDetailRepository
