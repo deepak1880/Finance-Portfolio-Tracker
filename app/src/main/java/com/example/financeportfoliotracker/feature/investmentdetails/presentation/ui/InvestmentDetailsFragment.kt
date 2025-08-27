@@ -13,6 +13,7 @@ import android.util.Log
 import android.widget.Toast
 import java.util.Calendar
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,9 +43,31 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
     }
 
     private fun setupSpinner() {
-        val funds = listOf("Fund A", "Fund B", "Fund C")
-        val adapter = ArrayAdapter(requireContext(), R.layout.simple_list_item_1, funds)
+        val funds = listOf(
+            "Alpha Growth Fund",
+            "BlueChip Equity Fund",
+            "Global Opportunities Fund",
+            "Sustainable Future Fund",
+            "Emerging Markets Fund",
+            "Balanced Advantage Fund",
+            "Tech Innovation Fund",
+            "Healthcare Leaders Fund",
+            "Real Estate Investment Fund",
+            "Energy & Infrastructure Fund"
+        )
+
+        val adapter =
+            ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, funds)
         binding.spinnerFund.setAdapter(adapter)
+
+        binding.spinnerFund.setOnItemClickListener { parent, _, position, _ ->
+            val selectedFund = parent.getItemAtPosition(position).toString()
+
+            binding.spinnerFund.setText(selectedFund, false)
+
+            binding.tvFundLabel.text = "Selected: $selectedFund"
+            Log.d("InvestmentDetail", "Selected Fund: $selectedFund")
+        }
     }
 
     private fun setupDatePicker() {
@@ -72,6 +95,7 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
         val fundName = binding.spinnerFund.text.toString()
         val investorName = binding.etInvestorName.editText?.text.toString()
         val investmentDate = binding.etInvestmentDate.editText?.text.toString()
+        val investmentAmount = binding.etInvestmentAmount.editText?.text.toString()
         val status = when {
             binding.radioActive.isChecked -> "Active"
             binding.radioComplete.isChecked -> "Complete"
@@ -89,7 +113,7 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
             investmentName = investorName,
             investmentDate = investmentDate,
             investmentStatus = status,
-            investmentAmount = TODO(),
+            investmentAmount = investmentAmount.toDouble(),
         )
 
         if (selectedDetail == null) {
@@ -99,6 +123,7 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
             viewModel.updateInvestmentDetail(detail)
             Toast.makeText(requireContext(), "Investment updated", Toast.LENGTH_SHORT).show()
         }
+        findNavController().popBackStack()
 
         clearForm()
     }

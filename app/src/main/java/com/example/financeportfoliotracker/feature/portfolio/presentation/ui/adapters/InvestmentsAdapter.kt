@@ -2,12 +2,14 @@ package com.example.financeportfoliotracker.feature.portfolio.presentation.ui.ad
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.financeportfoliotracker.databinding.InvesterDetailsItemBinding
 import com.example.financeportfoliotracker.feature.portfolio.data.model.InvestmentEntity
+import com.example.financeportfoliotracker.R
 
 class InvestmentsAdapter(
-    private var items: List<InvestmentEntity> = listOf()
+    private var items: List<InvestmentEntity> = listOf(),
 ) : RecyclerView.Adapter<InvestmentsAdapter.InvestmentViewHolder>() {
 
     inner class InvestmentViewHolder(
@@ -19,6 +21,18 @@ class InvestmentsAdapter(
             binding.tvInvestorName.text = "Investor • ${item.investmentName}"
             binding.tvInvestmentDate.text = "Investment Date : ${item.investmentDate}"
             binding.btnStatus.text = item.investmentStatus
+            binding.btnStatus.apply {
+                text = item.investmentStatus
+
+                if (item.investmentStatus.equals("Complete", ignoreCase = true)) {
+                    backgroundTintList =
+                        ContextCompat.getColorStateList(context, R.color.success_green)
+                } else {
+                    backgroundTintList =
+                        ContextCompat.getColorStateList(context, R.color.dark_blue)
+                }
+            }
+
         }
     }
 

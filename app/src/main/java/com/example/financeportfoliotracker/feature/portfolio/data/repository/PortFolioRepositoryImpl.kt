@@ -13,4 +13,8 @@ class PortFolioRepositoryImpl @Inject constructor(
     override suspend fun getAllInvestmentsList(): List<InvestmentEntity> {
         return dao.getAllInvestments().first()
     }
+
+    override suspend fun updateInvestment(investment: InvestmentEntity) {
+        dao.updateInvestment(investment)
+    }
 }
