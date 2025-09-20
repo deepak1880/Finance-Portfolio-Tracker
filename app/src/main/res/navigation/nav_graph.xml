@@ -24,5 +24,13 @@
         android:id="@+id/investmentDetailsFragment"
         android:name="com.example.financeportfoliotracker.feature.investmentdetails.presentation.ui.InvestmentDetailsFragment"
         android:label="InvestmentDetailsFragment" >
+
+        <action
+            android:id="@+id/action_investmentFragment_to_success_fragment"
+            app:destination="@id/commonSuccessFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/commonSuccessFragment"
+        android:name="com.example.financeportfoliotracker.core.ui.views.CommonSuccessFragment"
+        android:label="CommonSuccessFragment" />
 </navigation>

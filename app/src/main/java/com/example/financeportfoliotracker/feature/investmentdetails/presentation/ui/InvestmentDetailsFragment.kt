@@ -51,8 +51,6 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
         binding.btnSubmit.setOnClickListener {
             handleSubmit()
         }
-
-        Constants.UPDATE_JOURNEY = false
     }
 
     private fun setupSpinner() {
@@ -132,10 +130,15 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
         } else {
             viewModel.insertInvestmentDetail(detail)
         }
-        Constants.UPDATE_JOURNEY = false
-        findNavController().popBackStack()
 
         clearForm()
+        val action = InvestmentDetailsFragmentDirections.actionInvestmentFragmentToSuccessFragment()
+        val bundle = Bundle().apply {
+            putBoolean("isUpdateJourney", Constants.UPDATE_JOURNEY)
+        }
+        findNavController().navigate(action.actionId, bundle)
+        Constants.UPDATE_JOURNEY = false
+
     }
 
     private fun clearForm() {

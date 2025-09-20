@@ -1,6 +1,7 @@
 package com.example.financeportfoliotracker
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.navigation.fragment.NavHostFragment
@@ -24,5 +25,18 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setupWithNavController(navController)
         setSupportActionBar(binding.topAppBar)
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.investmentDetailsFragment,
+                R.id.commonSuccessFragment -> {
+                    binding.bottomNavigation.visibility = View.GONE
+                    binding.topAppBar.visibility = View.GONE
+                }
+                else -> {
+                    binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.topAppBar.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 }

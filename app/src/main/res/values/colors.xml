@@ -3,10 +3,9 @@
     <color name="dark_blue">#4169E1</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="gray">#757575</color>        <!-- Medium gray for text -->
-    <color name="light_gray">#E0E0E0</color> <!-- Light gray for borders & strokes -->
+    <color name="gray">#757575</color>
+    <color name="light_gray">#E0E0E0</color>
 
-    <!-- Status Colors (optional, can be used later for risk levels etc.) -->
     <color name="success_green">#4CAF50</color>
     <color name="warning_orange">#FF9800</color>
     <color name="error_red">#F44336</color>
