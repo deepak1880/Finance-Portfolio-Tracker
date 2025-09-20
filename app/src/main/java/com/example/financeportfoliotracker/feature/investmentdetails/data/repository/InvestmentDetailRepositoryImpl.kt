@@ -19,4 +19,7 @@ class InvestmentDetailRepositoryImpl @Inject constructor(
 
     override suspend fun updateInvestmentDetail(detail: InvestmentEntity) =
         dao.updateInvestment(detail)
+
+    override suspend fun getInvestmentById(id: Int): InvestmentEntity =
+        dao.getInvestmentById(id)
 }

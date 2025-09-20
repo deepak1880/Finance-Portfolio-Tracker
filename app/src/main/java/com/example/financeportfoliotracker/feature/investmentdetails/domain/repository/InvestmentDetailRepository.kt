@@ -6,4 +6,5 @@ interface InvestmentDetailRepository {
     suspend fun getAllInvestmentDetails(): List<InvestmentEntity>
     suspend fun insertInvestmentDetail(detail: InvestmentEntity)
     suspend fun updateInvestmentDetail(detail: InvestmentEntity)
+    suspend fun getInvestmentById(id: Int): InvestmentEntity
 }

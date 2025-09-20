@@ -24,4 +24,7 @@ interface InvestmentDao {
     @Query("SELECT * FROM investments")
     fun getAllInvestments(): Flow<List<InvestmentEntity>>
 
+    @Query("SELECT * FROM investments WHERE investmentId = :id LIMIT 1")
+    suspend fun getInvestmentById(id: Int): InvestmentEntity
+
 }

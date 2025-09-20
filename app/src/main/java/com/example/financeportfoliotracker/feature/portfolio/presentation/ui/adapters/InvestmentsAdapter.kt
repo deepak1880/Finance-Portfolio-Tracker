@@ -18,6 +18,7 @@ class InvestmentsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: InvestmentEntity) {
+            binding.tvFundTitle.text=item.fundName
             binding.tvReturns.text = "₹${item.investmentAmount}"
             binding.tvInvestorName.text = "Investor • ${item.investmentName}"
             binding.tvInvestmentDate.text = "Investment Date : ${item.investmentDate}"

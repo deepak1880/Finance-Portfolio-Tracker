@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.financeportfoliotracker.feature.investmentdetails.domain.usecase.GetInvestmentByIdUseCase
 import com.example.financeportfoliotracker.feature.investmentdetails.domain.usecase.GetInvestmentDetailsUseCase
 import com.example.financeportfoliotracker.feature.investmentdetails.domain.usecase.InsertInvestmentDetailUseCase
 import com.example.financeportfoliotracker.feature.investmentdetails.domain.usecase.UpdateInvestmentDetailUseCase
@@ -16,11 +17,15 @@ import kotlinx.coroutines.launch
 class InvestmentDetailViewModel @Inject constructor(
     private val getUseCase: GetInvestmentDetailsUseCase,
     private val insertUseCase: InsertInvestmentDetailUseCase,
-    private val updateUseCase: UpdateInvestmentDetailUseCase
+    private val updateUseCase: UpdateInvestmentDetailUseCase,
+    private val getInvestmentByIdUseCase: GetInvestmentByIdUseCase
 ) : ViewModel() {
 
     private val _investmentDetails = MutableLiveData<List<InvestmentEntity>>()
     val investmentDetails: LiveData<List<InvestmentEntity>> = _investmentDetails
+
+    private val _selectedInvestment = MutableLiveData<InvestmentEntity>()
+    val selectedInvestment: LiveData<InvestmentEntity> = _selectedInvestment
 
     fun fetchInvestmentDetails() {
         viewModelScope.launch {
@@ -39,6 +44,13 @@ class InvestmentDetailViewModel @Inject constructor(
         viewModelScope.launch {
             updateUseCase(detail)
             fetchInvestmentDetails()
+        }
+    }
+
+    fun getInvestmentById(id: Int) {
+        viewModelScope.launch {
+            val investment = getInvestmentByIdUseCase(id)
+            _selectedInvestment.postValue(investment)
         }
     }
 }

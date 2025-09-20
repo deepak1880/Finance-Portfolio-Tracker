@@ -9,7 +9,7 @@ import com.example.financeportfoliotracker.databinding.FragmentInvestmentDetails
 import com.example.financeportfoliotracker.feature.investmentdetails.presentation.viewmodel.InvestmentDetailViewModel
 import com.example.financeportfoliotracker.feature.portfolio.data.model.InvestmentEntity
 import android.app.DatePickerDialog
-import android.util.Log
+import android.os.Bundle
 import android.widget.Toast
 import java.util.Calendar
 import android.widget.ArrayAdapter
@@ -22,11 +22,17 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
 
     private val viewModel: InvestmentDetailViewModel by viewModels()
     private var selectedDetail: InvestmentEntity? = null
+    private var investmentId: Int = 0
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ) = FragmentInvestmentDetailsBinding.inflate(inflater, container, false)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        investmentId = arguments?.getInt("investmentId") ?: 0
+    }
 
     override fun initialSetUp() {
         super.initialSetUp()
@@ -34,17 +40,16 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
         setupSpinner()
         setupDatePicker()
         observeInvestmentDetails()
+        observeInvestmentPrefilledDetails()
 
-        binding.btnSubmit.setOnClickListener {
-            handleSubmit()
-        }
-
+        binding.btnSubmit.text = if (Constants.UPDATE_JOURNEY) "Update" else "Submit"
         viewModel.fetchInvestmentDetails()
 
-        if (Constants.UPDATE_JOURNEY) {
-            binding.btnSubmit.text = "Update"
-        } else {
-            binding.btnSubmit.text = "Submit"
+        if (Constants.UPDATE_JOURNEY && investmentId != 0) {
+            viewModel.getInvestmentById(investmentId)
+        }
+        binding.btnSubmit.setOnClickListener {
+            handleSubmit()
         }
 
         Constants.UPDATE_JOURNEY = false
@@ -74,7 +79,6 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
             binding.spinnerFund.setText(selectedFund, false)
 
             binding.tvFundLabel.text = "Selected: $selectedFund"
-            Log.d("InvestmentDetail", "Selected Fund: $selectedFund")
         }
     }
 
@@ -95,7 +99,6 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
 
     private fun observeInvestmentDetails() {
         viewModel.investmentDetails.observe(viewLifecycleOwner) { list ->
-            Log.d("InvestmentDetail", "Current List: $list")
         }
     }
 
@@ -126,10 +129,8 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
 
         if (Constants.UPDATE_JOURNEY) {
             viewModel.updateInvestmentDetail(detail)
-            Toast.makeText(requireContext(), "Investment updated", Toast.LENGTH_SHORT).show()
         } else {
             viewModel.insertInvestmentDetail(detail)
-            Toast.makeText(requireContext(), "Investment added", Toast.LENGTH_SHORT).show()
         }
         Constants.UPDATE_JOURNEY = false
         findNavController().popBackStack()
@@ -145,7 +146,23 @@ class InvestmentDetailsFragment : BaseFragment<FragmentInvestmentDetailsBinding>
         selectedDetail = null
     }
 
-    override fun setUpOnClickListeners() {
-        super.setUpOnClickListeners()
+    private fun observeInvestmentPrefilledDetails() {
+        viewModel.selectedInvestment.observe(viewLifecycleOwner) { investment ->
+            investment?.let {
+                selectedDetail = it
+
+                binding.spinnerFund.setText(it.fundName, false)
+                binding.etInvestorName.editText?.setText(it.investmentName)
+                binding.etInvestmentDate.editText?.setText(it.investmentDate)
+                binding.etInvestmentAmount.editText?.setText(it.investmentAmount.toString())
+
+                if (it.investmentStatus == "Active") {
+                    binding.radioActive.isChecked = true
+                } else if (it.investmentStatus == "Complete") {
+                    binding.radioComplete.isChecked = true
+                }
+            }
+        }
     }
+
 }

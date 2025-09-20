@@ -1,5 +1,6 @@
 package com.example.financeportfoliotracker.feature.portfolio.presentation.ui.fragments
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +49,10 @@ class PortFolioFragment : BaseFragment<FragmentPortFolioBinding>() {
             Constants.UPDATE_JOURNEY=true
             val action = PortFolioFragmentDirections
                 .actionPortFolioFragmentToInvestmentDetailsFragment()
-            findNavController().navigate(action)
+            val bundle = Bundle().apply {
+                putInt("investmentId", investment.investmentId)
+            }
+            findNavController().navigate(action.actionId, bundle)
         })
         binding.rvInvestorDetails.apply {
             layoutManager = LinearLayoutManager(requireContext())
