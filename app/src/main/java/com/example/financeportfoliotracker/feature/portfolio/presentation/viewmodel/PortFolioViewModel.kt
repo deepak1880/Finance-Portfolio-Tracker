@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.financeportfoliotracker.feature.portfolio.data.model.InvestmentEntity
+import com.example.financeportfoliotracker.feature.portfolio.domain.usecase.DeleteInvestmentUseCase
 import com.example.financeportfoliotracker.feature.portfolio.domain.usecase.GetInvestmentsUseCase
-import com.example.financeportfoliotracker.feature.portfolio.domain.usecase.UpdateInvestmentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.launch
@@ -14,8 +14,8 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class PortFolioViewModel @Inject constructor(
     private val getAllInvestmentsUseCase: GetInvestmentsUseCase,
-    private val updateInvestmentUseCase: UpdateInvestmentUseCase
-) : ViewModel() {
+    private val deleteInvestmentUseCase: DeleteInvestmentUseCase,
+    ) : ViewModel() {
 
     private val _investments = MutableLiveData<List<InvestmentEntity>>()
     val investments: LiveData<List<InvestmentEntity>> = _investments
@@ -31,14 +31,12 @@ class PortFolioViewModel @Inject constructor(
         }
     }
 
-    fun updateInvestment(investment: InvestmentEntity) {
+    fun deleteInvestment(investment: InvestmentEntity) {
         viewModelScope.launch {
             try {
-                updateInvestmentUseCase(investment)
-                val updatedList = getAllInvestmentsUseCase()
-                _investments.value = updatedList
+                deleteInvestmentUseCase(investment)
+                fetchInvestments()
             } catch (e: Exception) {
-                e.printStackTrace()
             }
         }
     }

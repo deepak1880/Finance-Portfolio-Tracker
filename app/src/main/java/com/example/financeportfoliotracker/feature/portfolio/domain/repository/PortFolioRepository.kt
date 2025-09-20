@@ -4,6 +4,5 @@ import com.example.financeportfoliotracker.feature.portfolio.data.model.Investme
 
 interface PortFolioRepository {
     suspend fun getAllInvestmentsList(): List<InvestmentEntity>
-    suspend fun updateInvestment(investment: InvestmentEntity)
-
+    suspend fun deleteInvestment(investment: InvestmentEntity)
 }

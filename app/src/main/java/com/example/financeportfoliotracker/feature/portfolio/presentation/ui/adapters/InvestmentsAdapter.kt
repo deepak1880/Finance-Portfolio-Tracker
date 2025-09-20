@@ -10,7 +10,8 @@ import com.example.financeportfoliotracker.R
 
 class InvestmentsAdapter(
     private var items: List<InvestmentEntity> = listOf(),
-    private val onItemClick: (InvestmentEntity) -> Unit
+    private val onItemClick: (InvestmentEntity) -> Unit,
+    private val onDeleteClick: (InvestmentEntity) -> Unit
 ) : RecyclerView.Adapter<InvestmentsAdapter.InvestmentViewHolder>() {
 
     inner class InvestmentViewHolder(
@@ -34,8 +35,11 @@ class InvestmentsAdapter(
                         ContextCompat.getColorStateList(context, R.color.dark_blue)
                 }
             }
-            binding.root.setOnClickListener {
+            binding.parentMaterialCardView.setOnClickListener {
                 onItemClick(item)
+            }
+            binding.imgDelete.setOnClickListener {
+                onDeleteClick(item)
             }
         }
     }
@@ -55,7 +59,7 @@ class InvestmentsAdapter(
 
     override fun getItemCount() = items.size
 
-    fun setData(newItems: List<InvestmentEntity>) {
+    fun submitList(newItems: List<InvestmentEntity>) {
         items = newItems
         notifyDataSetChanged()
     }
