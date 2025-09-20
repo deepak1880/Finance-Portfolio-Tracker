@@ -62,10 +62,14 @@ class PortFolioFragment : BaseFragment<FragmentPortFolioBinding>() {
         viewModel.investments.observe(viewLifecycleOwner) { investments ->
             if (investments.isNotEmpty()) {
                 binding.rvInvestorDetails.visibility = View.VISIBLE
+                binding.noDataFound.visibility= View.GONE
+                binding.tvNoDataFound.visibility= View.GONE
                 allInvestments = investments
                 adapter.setData(allInvestments)
             } else {
                 binding.rvInvestorDetails.visibility = View.GONE
+                binding.noDataFound.visibility= View.VISIBLE
+                binding.tvNoDataFound.visibility= View.VISIBLE
             }
         }
 
@@ -77,6 +81,15 @@ class PortFolioFragment : BaseFragment<FragmentPortFolioBinding>() {
             "Active" -> allInvestments.filter { it.investmentStatus.equals("Active", true) }
             "Completed" -> allInvestments.filter { it.investmentStatus.equals("Complete", true) }
             else -> allInvestments
+        }
+        if (filtered.isEmpty()) {
+            binding.rvInvestorDetails.visibility = View.GONE
+            binding.noDataFound.visibility = View.VISIBLE
+            binding.tvNoDataFound.visibility = View.VISIBLE
+        } else {
+            binding.rvInvestorDetails.visibility = View.VISIBLE
+            binding.noDataFound.visibility = View.GONE
+            binding.tvNoDataFound.visibility = View.GONE
         }
         adapter.setData(filtered)
     }
