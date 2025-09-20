@@ -8,12 +8,12 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/dimen_1dp"
         app:cardElevation="@dimen/dimen_5dp"
-        android:layout_marginStart="@dimen/dimen_10dp"
-        android:layout_marginEnd="@dimen/dimen_10dp"
-        android:layout_marginTop="@dimen/dimen_10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,12 +31,12 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_semibold"
                 android:maxLines="1"
-                tools:text="SBI Healthcare Opportunities Fund"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen_16sp"
                 app:layout_constraintEnd_toStartOf="@+id/tvReturns"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="SBI Healthcare Opportunities Fund" />
 
             <TextView
                 android:id="@+id/tvReturns"
@@ -47,7 +47,19 @@
                 android:text="₹5,000"
                 android:textColor="@color/dark_blue"
                 android:textSize="@dimen/dimen_16sp"
+                app:layout_constraintEnd_toStartOf="@+id/imgDelete"
+                app:layout_constraintStart_toEndOf="@+id/tvFundTitle"
+                app:layout_constraintTop_toTopOf="@id/tvFundTitle" />
+
+            <ImageView
+                android:id="@+id/imgDelete"
+                android:layout_width="@dimen/dimen_22dp"
+                android:layout_height="@dimen/dimen_22dp"
+                android:src="@drawable/ic_delete"
+
+                android:layout_marginEnd="@dimen/dimen_5dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvReturns"
                 app:layout_constraintTop_toTopOf="@id/tvFundTitle" />
 
             <TextView

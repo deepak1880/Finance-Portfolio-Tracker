@@ -10,9 +10,10 @@ import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.financeportfoliotracker.R
 import com.example.financeportfoliotracker.core.ui.base.BaseFragment
-import com.example.financeportfoliotracker.core.utils.Constants
 import com.example.financeportfoliotracker.databinding.FragmentCommonSuccessBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CommonSuccessFragment : BaseFragment<FragmentCommonSuccessBinding>() {
 
     private lateinit var lottieAnimationView: LottieAnimationView

@@ -27,14 +27,12 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.investmentDetailsFragment,
-                R.id.commonSuccessFragment -> {
+                R.id.commonSuccessFragment,
+                R.id.investmentDetailsFragment -> {
                     binding.bottomNavigation.visibility = View.GONE
-                    binding.topAppBar.visibility = View.GONE
                 }
                 else -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
-                    binding.topAppBar.visibility = View.VISIBLE
                 }
             }
         }
